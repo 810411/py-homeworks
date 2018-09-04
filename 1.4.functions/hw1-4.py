@@ -111,17 +111,17 @@ def format_input(user_input):
     return user_input
 
 
-while True:
-    functions = {
-        'p': search_person_by_doc_number,
-        'l': print_list_of_documents,
-        's': search_shelf_by_doc_number,
-        'a': adding_doc,
-        'd': deleting_doc,
-        'm': moving_doc_inter_shelves,
-        'as': adding_shelf
-    }
+functions = {
+    'p': search_person_by_doc_number,
+    'l': print_list_of_documents,
+    's': search_shelf_by_doc_number,
+    'a': adding_doc,
+    'd': deleting_doc,
+    'm': moving_doc_inter_shelves,
+    'as': adding_shelf
+}
 
+while True:
     command = input('Введите команду ("q" - выход): ')
     if command == 'q':
         break
