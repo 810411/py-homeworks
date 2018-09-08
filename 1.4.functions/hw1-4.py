@@ -69,8 +69,8 @@ def deleting_doc(remove_in_docs=True, doc_number=''):
         doc_number = input('Введите номер документа: ')
     try:
         if remove_in_docs:
-            [documents.remove(_) for _ in documents if doc_number in _.values()]
-            print('Документ "{}" удален'.format(doc_number))
+            [(documents.remove(_), print('Документ "{}" удален'.format(doc_number))) for _ in documents if
+             doc_number in _.values()]
         [value.remove(doc_number) for value in directories.values() if doc_number in value]
     except ValueError:
         print('Соответствий не найдено')
