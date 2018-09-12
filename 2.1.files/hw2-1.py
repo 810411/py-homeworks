@@ -1,10 +1,10 @@
 def ingredient_line_to_dict(ingredient):
     """ Разбиваем принятую строку описания ингридиента в словарь по заданным ключам """
     ingredient_dict = {}
-    ingredient = ingredient.strip().split('|')
-    ingredient_dict['ingredient_name'] = ingredient[0]
+    ingredient = ingredient.split('|')
+    ingredient_dict['ingredient_name'] = ingredient[0].strip()
     ingredient_dict['quantity'] = int(ingredient[1])
-    ingredient_dict['measure'] = ingredient[2]
+    ingredient_dict['measure'] = ingredient[2].strip()
     return ingredient_dict
 
 
@@ -30,7 +30,7 @@ def get_shop_list_by_dishes(dishes, person_count):
         for ingredient in cook_book[dish]:
             key = ingredient['ingredient_name']
             quantity = ingredient['quantity'] * person_count
-            if key in ingredients_dict.keys():
+            if key in ingredients_dict:
                 ingredients_dict[key]['quantity'] += quantity
             else:
                 ingredients_dict[key] = {
