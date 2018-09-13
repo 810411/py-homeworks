@@ -26,7 +26,7 @@ class Animal:
 
     @staticmethod
     def _collect_message(self, out_count, out_type):
-        """ метод уведомляющий о результатах подоить/постричь/собрать"""
+        """ Метод уведомляющий о результатах подоить/постричь/собрать"""
         message = 'От {} получили {} {}'.format(self.name, out_count, out_type)
         return message
 
@@ -36,8 +36,8 @@ class Giver:
         pass
 
 
-class Milkgiver(Giver):
-    """ родительский класс для животных дающих молоко """
+class MilkGiver(Giver):
+    """ Родительский класс для животных дающих молоко """
     _milk = 10  # litre
 
     def get_milk(self):
@@ -47,8 +47,8 @@ class Milkgiver(Giver):
         print(self._collect_message(self, self.get_milk(), 'л молока'))
 
 
-class Egggiver(Giver):
-    """ родительский класс для животных дающих яйца """
+class EggGiver(Giver):
+    """ Родительский класс для животных дающих яйца """
     _egg = 2
 
     def get_egg(self):
@@ -58,7 +58,7 @@ class Egggiver(Giver):
         print(self._collect_message(self, self.get_egg(), 'яйца(о)'))
 
 
-class Cow(Animal, Milkgiver):
+class Cow(Animal, MilkGiver):
     _appetite = 10000
     _voice = 'Му-муууу'
 
@@ -66,24 +66,24 @@ class Cow(Animal, Milkgiver):
         return self._milk - (self._appetite / 1000)
 
 
-class Goat(Animal, Milkgiver):
+class Goat(Animal, MilkGiver):
     _milk = 5
     _voice = 'Меееее'
     _appetite = 1000
 
 
-class Goose(Animal, Egggiver):
+class Goose(Animal, EggGiver):
     _weight = 5
     _voice = 'Га-га-га'
     _egg = 1
 
 
-class Duck(Animal, Egggiver):
+class Duck(Animal, EggGiver):
     _weight = 4
     _voice = 'Кря-кря'
 
 
-class Hen(Animal, Egggiver):
+class Hen(Animal, EggGiver):
     _weight = 3
     _voice = 'Ко-ко-ко'
     _egg = 3
@@ -96,7 +96,7 @@ class Sheep(Animal):
     _wool = 5  # кг%
 
     def to_trim(self, wool=5):
-        """ метод стрижки, задает количество запрошенной шерсти если таковое имеется либо всю имеющуюся шерсть"""
+        """ Метод стрижки, задает количество запрошенной шерсти если таковое имеется либо всю имеющуюся шерсть"""
         self._wool = wool if wool <= self._wool else self._wool
         return self._wool
 
@@ -107,7 +107,7 @@ class Sheep(Animal):
         print(self._collect_message(self, self.get_wool(), 'кг шерсти'))
 
 
-# колхоз Дядюшки Джо
+# Колхоз Дядюшки Джо
 translator = {
     'Cow': 'корова',
     'Goose': 'гусь',
