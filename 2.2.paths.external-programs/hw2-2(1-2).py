@@ -21,9 +21,15 @@ def search_in_sql(file_list_: list, user_string_: str, dir_=migrations_dir):
 
 
 def print_file_list(file_list_: list, dir_=migrations_dir):
-    """ Принимает список имен файлов, выводит в консоль  имена файлов построчно и длину списка """
-    for file_ in file_list_:
-        print(os.path.join(os.path.basename(dir_), file_))
+    """ Принимает список имен файлов, выводит в консоль имена файлов построчно если их количество < 6 иначе первый и
+     последний элементы списка, и длину списка """
+    if len(file_list) < 6:
+        for file_ in file_list_:
+            print(os.path.join(os.path.basename(dir_), file_))
+    else:
+        print(os.path.join(os.path.basename(dir_), file_list_[0]))
+        print('...')
+        print(os.path.join(os.path.basename(dir_), file_list_[len(file_list) - 1]))
     print('Всего: {}'.format(len(file_list_)))
 
 
