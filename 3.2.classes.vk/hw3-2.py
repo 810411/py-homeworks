@@ -12,7 +12,7 @@ class UserVK:
     def __init__(self, ids, token=TOKEN):
         """
         :param ids: <str> идентификатор пользователя VK
-        :param token: <str> ключа доступа VK
+        :param token: <str> ключ доступа VK
         """
         self.ids = ids
         self.main_info = self.main_info()
@@ -64,9 +64,9 @@ class UserVK:
 
 # Создаем двух пользователей, выводим их Имя Фамилию и ссылку на страницу, сравниваем списки друзей, добавляем
 # общих друзей в список, выводим Имя Фамилию и ссылку на страницу для общих друзей
-user1 = UserVK('28234227')
+user1 = UserVK('1')
 print(user1.info, user1)
-user2 = UserVK('27404809')
+user2 = UserVK('2')
 print(user2.info, user2)
 print('Список общих друзей (построение займет какое-то время в зависимости от количества результатов):')
 common_friends = user1 & user2
