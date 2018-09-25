@@ -59,16 +59,19 @@ class UserVK:
     def info(self):
         first_name = self.main_info['first_name']
         last_name = self.main_info['last_name']
-        return f'Пользователь: {first_name} {last_name}.'
+        return f'{first_name} {last_name}.'
 
 
 # Создаем двух пользователей, выводим их Имя Фамилию и ссылку на страницу, сравниваем списки друзей, добавляем
 # общих друзей в список, выводим Имя Фамилию и ссылку на страницу для общих друзей
-user1 = UserVK('1')  # Идентификатор пользователя ВК
+user1 = UserVK('5')  # Идентификатор пользователя ВК
 print(user1.info, user1)
-user2 = UserVK('5')  # Идентификатор пользователя ВК
+user2 = UserVK('6')  # Идентификатор пользователя ВК
 print(user2.info, user2)
 print('Список общих друзей (построение займет какое-то время в зависимости от количества результатов):')
 common_friends = user1 & user2
-for friend in common_friends:
-    print(friend.info, friend)
+if len(common_friends) == 0:
+    print('У данных пользователей общих друзей нет')
+else:
+    for friend in common_friends:
+        print(friend.info, friend)
