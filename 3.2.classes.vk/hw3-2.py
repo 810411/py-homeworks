@@ -2,43 +2,41 @@
 import requests
 import time
 
-TOKEN = ''  # Заполнить значением ключа доступа ВК
-
 
 class UserVK:
     """ Класс для экземпляров описывающих пользователей VK и реализующий поиск общих друзей экземпляров
     Экземпляр класса создается на основе идентификатора пользователя VK"""
+    _token = 'b000aebb550a08349928932f3f7dc767e8985ed168e98cdbce24711e8df02b4a9ec9569b52b7e2f0fbcbb'  # Заполнить значением ключа доступа ВК
 
-    def __init__(self, ids, token=TOKEN):
+    def __init__(self, ids):
         """
         :param ids: <str> идентификатор пользователя VK
-        :param token: <str> ключ доступа VK
         """
-        self.ids = ids
-        self.main_info = self.main_info()
-        self.id = self.main_info['id']
+        self._ids = ids
+        self._main_info = self._main_info()
+        self._id = self._main_info['id']
 
     def __str__(self):
-        return f'https://vk.com/id{self.ids}'
+        return f'https://vk.com/id{self._ids}'
 
     def __and__(self, other):
-        friend_list = set(self.friends) & set(other.friends)
+        mutual_friends = set(self._friends) & set(other._friends)
         users_list = []
-        for user_id in friend_list:
+        for user_id in mutual_friends:
             time.sleep(0.5)
             users_list.append(UserVK(user_id))
         return users_list
 
     @property
-    def params(self):
+    def _params(self):
         return {
-            'access_token': TOKEN,
+            'access_token': self._token,
             'v': '5.85',
         }
 
-    def main_info(self):
-        params = self.params
-        params['user_ids'] = self.ids
+    def _main_info(self):
+        params = self._params
+        params['user_ids'] = self._ids
         response = requests.get(f'https://api.vk.com/method/users.get', params).json()
         if 'error' in response:
             print(response['error']['error_msg'])
@@ -46,10 +44,10 @@ class UserVK:
         return response['response'][0]
 
     @property
-    def friends(self):
+    def _friends(self):
         lst = []
-        params = self.params
-        params['user_id'] = self.id
+        params = self._params
+        params['user_id'] = self._id
         response = requests.get(f'https://api.vk.com/method/friends.get', params).json()
         if 'response' in response:
             lst = response['response']['items']
@@ -57,8 +55,8 @@ class UserVK:
 
     @property
     def info(self):
-        first_name = self.main_info['first_name']
-        last_name = self.main_info['last_name']
+        first_name = self._main_info['first_name']
+        last_name = self._main_info['last_name']
         return f'{first_name} {last_name}.'
 
 

@@ -15,4 +15,4 @@ def create_token(app_id):
     print('?'.join(('https://oauth.vk.com/authorize', urlencode(oauth_data))))
 
 
-create_token('') #  Заполнить id своего приложения VK
+create_token('')  # Заполнить id своего приложения VK
