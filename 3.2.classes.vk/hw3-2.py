@@ -14,8 +14,7 @@ class UserVK:
         :param ids: <str> идентификатор пользователя VK
         """
         self._ids = ids
-        self._main_info = self._main_info()
-        self._id = self._main_info['id']
+        self._id = self.main_info['id']
 
     def __str__(self):
         return f'https://vk.com/id{self._ids}'
@@ -35,6 +34,7 @@ class UserVK:
             'v': '5.85',
         }
 
+    @property
     def main_info(self):
         params = self.params
         params['user_ids'] = self._ids
@@ -56,8 +56,8 @@ class UserVK:
 
     @property
     def info(self):
-        first_name = self._main_info['first_name']
-        last_name = self._main_info['last_name']
+        first_name = self.main_info['first_name']
+        last_name = self.main_info['last_name']
         return f'{first_name} {last_name}.'
 
 
