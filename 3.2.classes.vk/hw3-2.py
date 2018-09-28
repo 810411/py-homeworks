@@ -21,7 +21,7 @@ class UserVK:
         return f'https://vk.com/id{self._ids}'
 
     def __and__(self, other):
-        mutual_friends = set(self._friends) & set(other._friends)
+        mutual_friends = set(self.friends) & set(other.friends)
         users_list = []
         for user_id in mutual_friends:
             time.sleep(0.5)
@@ -29,14 +29,14 @@ class UserVK:
         return users_list
 
     @property
-    def _params(self):
+    def params(self):
         return {
             'access_token': self._token,
             'v': '5.85',
         }
 
-    def _main_info(self):
-        params = self._params
+    def main_info(self):
+        params = self.params
         params['user_ids'] = self._ids
         response = requests.get(f'https://api.vk.com/method/users.get', params).json()
         if 'error' in response:
@@ -45,9 +45,9 @@ class UserVK:
         return response['response'][0]
 
     @property
-    def _friends(self):
+    def friends(self):
         lst = []
-        params = self._params
+        params = self.params
         params['user_id'] = self._id
         response = requests.get(f'https://api.vk.com/method/friends.get', params).json()
         if 'response' in response:
